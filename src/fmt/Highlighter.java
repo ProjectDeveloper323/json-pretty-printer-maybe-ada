@@ -1,5 +1,7 @@
 package src.fmt;
 
+import org.antlr.v4.* ;
+import org.antlr.v4.runtime.*;
 // TODO: Make a use of src.parse.JSONLexer to tokenize the input text
 // then colorize each token with the approporiate color 
 
@@ -20,3 +22,13 @@ package src.fmt;
 //              Style mystyle = context.addStyle("mystyle", null);
 //              StyleConstants.setForeground(mystyle, Color.red);
 // 
+
+public class Highlighter extends JSONLexer{
+	public static void main (String argsp[]){
+		String test = "hello world";
+		ANTLRFileStream str = new ANTLRFileStream(test);
+		JSONLexer lex = new JSONLexer(str);
+		CommonTokenStream tok = new CommonTokenStream(lex);
+
+	}
+}
