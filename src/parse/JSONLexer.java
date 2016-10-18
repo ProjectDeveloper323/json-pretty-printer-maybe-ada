@@ -1,3 +1,5 @@
+package src.parse;
+
 // Generated from JSON.g4 by ANTLR 4.5.3
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -16,14 +18,14 @@ public class JSONLexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9,
 		STRING=10, NUMBER=11, WS=12;
 	public static String[] modeNames = {
 		"DEFAULT_MODE"
 	};
 
 	public static final String[] ruleNames = {
-		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
+		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8",
 		"STRING", "ESC", "UNICODE", "HEX", "NUMBER", "INT", "EXP", "WS"
 	};
 
@@ -31,7 +33,7 @@ public class JSONLexer extends Lexer {
 		null, "'{'", "','", "'}'", "':'", "'['", "']'", "'true'", "'false'", "'null'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, "STRING", 
+		null, null, null, null, null, null, null, null, null, null, "STRING",
 		"NUMBER", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);

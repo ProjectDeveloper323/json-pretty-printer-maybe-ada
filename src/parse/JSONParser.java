@@ -1,3 +1,4 @@
+
 // Generated from JSON.g4 by ANTLR 4.5.3
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -16,7 +17,7 @@ public class JSONParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9,
 		STRING=10, NUMBER=11, WS=12;
 	public static final int
 		RULE_json = 0, RULE_object = 1, RULE_pair = 2, RULE_array = 3, RULE_value = 4;
@@ -28,7 +29,7 @@ public class JSONParser extends Parser {
 		null, "'{'", "','", "'}'", "':'", "'['", "']'", "'true'", "'false'", "'null'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, null, null, "STRING", 
+		null, null, null, null, null, null, null, null, null, null, "STRING",
 		"NUMBER", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -124,7 +125,7 @@ public class JSONParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_object; }
-	 
+
 		public ObjectContext() { }
 		public void copyFrom(ObjectContext ctx) {
 			super.copyFrom(ctx);
@@ -267,7 +268,7 @@ public class JSONParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_array; }
-	 
+
 		public ArrayContext() { }
 		public void copyFrom(ArrayContext ctx) {
 			super.copyFrom(ctx);
@@ -366,7 +367,7 @@ public class JSONParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_value; }
-	 
+
 		public ValueContext() { }
 		public void copyFrom(ValueContext ctx) {
 			super.copyFrom(ctx);
