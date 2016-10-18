@@ -1,8 +1,11 @@
-
+package src.fmt;
 
 import org.antlr.v4.* ;
 import org.antlr.v4.runtime.*;
 import src.parse.JSONLexer;
+import java.util.Arrays;
+import java.util.ArrayList ;
+import java.util.List ;
 // TODO: Make a use of src.parse.JSONLexer to tokenize the input text
 // then colorize each token with the approporiate color
 
@@ -26,12 +29,31 @@ import src.parse.JSONLexer;
 
 public class Highlighter {
 	public static void main (String args[]) throws Exception{
+
 		System.out.println("tetsing");
-		ANTLRFileStream str = new ANTLRFileStream(args[0]);
-		System.out.println("tetsing string " + str);
+		CharStream str = new ANTLRInputStream("[{\"key\" : true}]");
 		JSONLexer lex = new JSONLexer(str);
 		CommonTokenStream tok = new CommonTokenStream(lex);
-		System.out.println(tok);
+		tok.fill();
+		System.out.println(tok.size());
+		//System.out.println("string is" + tok.toString());
+
+		/*
+		ArrayList<String> allTokens = tok.getTokens();
+		Object[] objectList = allTokens.toArray();
+		String[] stringArray =  Arrays.copyOf(objectList,objectList.length,String[].class);
+		for(int i = 0 ; i<stringArray.length();i++){
+			
+			System.out.println(stringArray[i]);
+		}
+*/
+
+		String[] lines = new String[tok.size()]; 
+		for(int i =0 ;i<lines.length ;i++){
+			lines[i] = tok.get(i).getText();
+			System.out.println(lines[i]);
+			System.out.println("");
+		}
 
 	}
 }
