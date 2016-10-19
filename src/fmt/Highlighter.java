@@ -3,9 +3,7 @@ package src.fmt;
 import org.antlr.v4.* ;
 import org.antlr.v4.runtime.*;
 import src.parse.JSONLexer;
-import java.util.Arrays;
-import java.util.ArrayList ;
-import java.util.List ;
+import javax.swing.text.StyledDocument ;
 // TODO: Make a use of src.parse.JSONLexer to tokenize the input text
 // then colorize each token with the approporiate color
 
@@ -28,6 +26,10 @@ import java.util.List ;
 //
 
 public class Highlighter {
+	Highlighter(StyledDocument doc){
+		String docString = doc.toString();
+	}
+
 	public static void main (String args[]) throws Exception{
 
 		System.out.println("tetsing");
@@ -35,22 +37,17 @@ public class Highlighter {
 		JSONLexer lex = new JSONLexer(str);
 		CommonTokenStream tok = new CommonTokenStream(lex);
 		tok.fill();
-		System.out.println(tok.size());
-		//System.out.println("string is" + tok.toString());
+	//	System.out.println(tok.size());
 
-		/*
-		ArrayList<String> allTokens = tok.getTokens();
-		Object[] objectList = allTokens.toArray();
-		String[] stringArray =  Arrays.copyOf(objectList,objectList.length,String[].class);
-		for(int i = 0 ; i<stringArray.length();i++){
-			
-			System.out.println(stringArray[i]);
-		}
-*/
 
 		String[] lines = new String[tok.size()]; 
+		int [] tokenIndex = new int[tok.size()-1];
+		int [] tokenEndIndex = new int[tok.size()-1];
+
 		for(int i =0 ;i<lines.length ;i++){
 			lines[i] = tok.get(i).getText();
+			tokenIndex[i]= tok.get(i).getTokenIndex();
+			tokenEndIndex[i] = lines[i].length();
 			System.out.println(lines[i]);
 			System.out.println("");
 		}
