@@ -10,6 +10,8 @@ import javax.swing.event.DocumentEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
+import src.fmt.Highlighter;
+import javax.swing.text.StyledDocument ;
 
 // Highlighting
 // import src.fmt.Highlighter;
@@ -21,6 +23,8 @@ public class EditorPanel extends JPanel{
     private JTextPane text_pane;
     private JTextPane prev_pane;
     private JSplitPane splitPane; 
+
+    Highlighter highlighter ;
 
     // Use this field to check if formatting is enabled
     // However you must find a way to set it when a user 
@@ -84,14 +88,20 @@ public class EditorPanel extends JPanel{
         }
 
         // At the end do highlighting too
-        dohighlight();
+        dohighlight(text_pane.getText() , (StyledDocument)text_pane.getStyledDocument() );
+        System.out.println("UPDATED");
     }
     private void doformat(){
         // Add your formatting logic here
     }
     
-    private void dohighlight(){
+    private void dohighlight(String docString , StyledDocument doc){
         // Add your highlighting logic here
+        highlighter = new Highlighter(docString ,doc);
+        highlighter.tokenize();
+        highlighter.colorize();
+
+        prev_pane.setStyledDocument(highlighter.doc); 
     }
 
 }

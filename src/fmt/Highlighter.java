@@ -46,11 +46,12 @@ public class Highlighter {
 	public static StyleContext blueContext; 
 	public static Style blueStyle;
 
-	Highlighter(StyledDocument doc){
-		docString = doc.toString();
+	public Highlighter(String docString ,StyledDocument doc){
 		this.doc = doc ;
+		this.docString = docString ;
 		System.out.println("testing");
-		CharStream str = new ANTLRInputStream("[{\"key\" = true}]");
+		CharStream str = new ANTLRInputStream(docString);
+		System.out.println(docString);
 		JSONLexer lex = new JSONLexer(str);
 		tok = new CommonTokenStream(lex);
 		tok.fill();
