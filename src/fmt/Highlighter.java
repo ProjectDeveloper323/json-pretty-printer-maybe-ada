@@ -31,43 +31,55 @@ import javax.swing.text.Style;
 //
 
 public class Highlighter {
-	String docString ;
-	StyledDocument doc ;
+	public static CommonTokenStream tok ;
+	public static String docString ;
+	public StyledDocument doc ;
+	String[] lines ;
+	int [] tokenIndex ; 
+
+	public static StyleContext greenContext ; 
+	public static Style greenStyle ;
+	public static StyleContext yellowContext ;
+	public static Style yellowStyle ;
+	public static StyleContext redContext;
+	public static Style redStyle ;
+	public static StyleContext blueContext; 
+	public static Style blueStyle;
+
 	Highlighter(StyledDocument doc){
 		docString = doc.toString();
 		this.doc = doc ;
-	}
-
-	public static void main (String args[]) throws Exception{
-
-		System.out.println("tetsing");
+		System.out.println("testing");
 		CharStream str = new ANTLRInputStream("[{\"key\" = true}]");
 		JSONLexer lex = new JSONLexer(str);
-		CommonTokenStream tok = new CommonTokenStream(lex);
+		tok = new CommonTokenStream(lex);
 		tok.fill();
-	//	System.out.println(tok.size());
 
+	}
+	public void tokenize(){
 
-		String[] lines = new String[tok.size()];
-		int [] tokenIndex = new int[tok.size()];
-		int [] tokenEndIndex = new int[tok.size()];
+		lines = new String[tok.size()];
+		tokenIndex = new int[tok.size()];
 
 		for(int i =0 ;i<lines.length ;i++){
 			lines[i] = tok.get(i).getText();
 			tokenIndex[i]= tok.get(i).getTokenIndex();
-			tokenEndIndex[i] = tokenIndex[i]+lines[i].length();
 			System.out.println(lines[i]);
 			System.out.println("");
 		}//end of for
 
+	}
+
+	public void colorize(){
+
 		//style for curly brackets
-		StyleContext greenContext = new StyleContext();
-		Style greenStyle = greenContext.addStyle("greenStyle", null);
+		greenContext = new StyleContext();
+		greenStyle = greenContext.addStyle("greenStyle", null);
 		StyleConstants.setForeground(greenStyle, Color.green);
 
 		//style for square bracket
-		StyleContext yellowContext = new StyleContext();
-		Style yellowStyle = yellowContext.addStyle("yellowStyle", null);
+		yellowContext = new StyleContext();
+		yellowStyle = yellowContext.addStyle("yellowStyle", null);
 		StyleConstants.setForeground(yellowStyle, Color.yellow);
 
 		//style for keywords ;
@@ -76,8 +88,8 @@ public class Highlighter {
 		StyleConstants.setForeground(redStyle, Color.red);
 
 		//style for string , numbers
-		StyleContext blueContext = new StyleContext();
-		Style blueStyle = blueContext.addStyle("blueStyle", null);
+		blueContext = new StyleContext();
+		blueStyle = blueContext.addStyle("blueStyle", null);
 		StyleConstants.setForeground(blueStyle, Color.blue);
 
 
@@ -86,27 +98,31 @@ public class Highlighter {
 			switch(lines[i]){
 				case "{" : case "}"  :{
 					System.out.println("this is {");
-					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , greenStyle, false);
+					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , greenStyle, false);
 					break ;
 				}
 				case "[" : case "]"  :{
 					System.out.println("this is [");
-					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , yellowStyle, false);
+					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , yellowStyle, false);
 					break ;
 				}
 				case "null" : case "true"  : case "false" :{
 					System.out.println("keyword");
-					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
+					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
 					break ;
 				}
 				default :
 					System.out.println("String OR int OR float");
-					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
+					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
 					break ;
 
-}//end of switch
+			}//end of switch
 
 		}//end of for
 
-	}//end of main
+	}//end of colorize method
+
+
+
+
 }//end of class
