@@ -5,9 +5,9 @@ import org.antlr.v4.runtime.*;
 import src.parse.JSONLexer;
 import javax.swing.text.StyledDocument ;
 import java.awt.Color ;
-import java.awt.style;
 import javax.swing.text.StyleContext;
 import javax.swing.text.StyleConstants;
+import javax.swing.text.Style;
 
 // TODO: Make a use of src.parse.JSONLexer to tokenize the input text
 // then colorize each token with the approporiate color
@@ -32,8 +32,10 @@ import javax.swing.text.StyleConstants;
 
 public class Highlighter {
 	String docString ;
+	StyledDocument doc ;
 	Highlighter(StyledDocument doc){
 		docString = doc.toString();
+		this.doc = doc ;
 	}
 
 	public static void main (String args[]) throws Exception{
@@ -84,22 +86,22 @@ public class Highlighter {
 			switch(lines[i]){
 				case "{" : case "}"  :{
 					System.out.println("this is {");
-					docString.setCharacterAttributes(tokenIndex[i],lines[i].length() , greenStyle, false);
+					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , greenStyle, false);
 					break ;
 				}
 				case "[" : case "]"  :{
 					System.out.println("this is [");
-					docString.setCharacterAttributes(tokenIndex[i],lines[i].length() , yellowStyle, false);
+					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , yellowStyle, false);
 					break ;
 				}
 				case "null" : case "true"  : case "false" :{
 					System.out.println("keyword");
-					docString.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
+					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
 					break ;
 				}
 				default :
 					System.out.println("String OR int OR float");
-					docString.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
+					doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
 					break ;
 
 }//end of switch
