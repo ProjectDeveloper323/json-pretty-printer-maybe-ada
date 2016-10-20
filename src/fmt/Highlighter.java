@@ -35,15 +35,17 @@ public class Highlighter {
 	public static String docString ;
 	public StyledDocument doc ;
 	String[] lines ;
-	int [] tokenIndex ; 
+	int [] tokenIndex ;
+    String number;
+    String floatf;
 
-	public static StyleContext greenContext ; 
+	public static StyleContext greenContext ;
 	public static Style greenStyle ;
 	public static StyleContext yellowContext ;
 	public static Style yellowStyle ;
 	public static StyleContext redContext;
 	public static Style redStyle ;
-	public static StyleContext blueContext; 
+	public static StyleContext blueContext;
 	public static Style blueStyle;
 
 	public Highlighter(String docString ,StyledDocument doc){
@@ -69,7 +71,7 @@ public class Highlighter {
 			System.out.println("");
 		}//end of for
 
-	}
+	}//end of tokenize method
 
 	public void colorize(){
 
@@ -88,35 +90,73 @@ public class Highlighter {
 		Style redStyle = redContext.addStyle("redStyle", null);
 		StyleConstants.setForeground(redStyle, Color.red);
 
-		//style for string , numbers
+		//style for integer ;
+		StyleContext orangeContext = new StyleContext();
+		Style orangeStyle = orangeContext.addStyle("orangeStyle", null);
+		StyleConstants.setForeground(orangeStyle, Color.orange);
+
+
+        //style for float ;
+		StyleContext magentaContext = new StyleContext();
+		Style magentaStyle = magentaContext.addStyle("magentaStyle", null);
+		StyleConstants.setForeground(magentaStyle, Color.magenta);
+
+		//style for string
 		blueContext = new StyleContext();
 		blueStyle = blueContext.addStyle("blueStyle", null);
 		StyleConstants.setForeground(blueStyle, Color.blue);
 
 
 
+
 		for(int i=0;i<lines.length ;i++){
 			switch(lines[i]){
 				case "{" : case "}"  :{
-					System.out.println("this is {");
+					System.out.println("this is {}");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , greenStyle, false);
 					break ;
 				}
 				case "[" : case "]"  :{
-					System.out.println("this is [");
+					System.out.println("this is []");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , yellowStyle, false);
 					break ;
 				}
 				case "null" : case "true"  : case "false" :{
 					System.out.println("keyword");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
-					break ;
-				}
-				default :
-					System.out.println("String OR int OR float");
-					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
-					break ;
 
+				}
+
+				default :
+				try
+				{
+					System.out.println("String");
+					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
+					try
+					{
+						Integer.parseInt(lines[i]);
+						System.out.println("this is Integer");
+						this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , orangeStyle, false);
+					}
+					catch (ArithmeticException e)
+					{
+						System.out.println("ArithmeticException IN Integer");
+					}
+					try
+					{
+						Float.parseFloat(lines[i]);
+				    	System.out.println("this is flaot");
+				    	this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , magentaStyle, false);
+					}
+					catch (ArithmeticException e)
+					{
+						System.out.println("ArithmeticException IN Float");
+					}
+				}
+				catch (ArithmeticException e)
+				{
+					System.out.println("ArithmeticException IN String");
+				}
 			}//end of switch
 
 		}//end of for
