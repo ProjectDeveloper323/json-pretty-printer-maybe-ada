@@ -35,15 +35,17 @@ public class Highlighter {
 	public static String docString ;
 	public StyledDocument doc ;
 	String[] lines ;
-	int [] tokenIndex ; 
+	int [] tokenIndex ;
+    String number;
+    String floatf;
 
-	public static StyleContext greenContext ; 
+	public static StyleContext greenContext ;
 	public static Style greenStyle ;
 	public static StyleContext yellowContext ;
 	public static Style yellowStyle ;
 	public static StyleContext redContext;
 	public static Style redStyle ;
-	public static StyleContext blueContext; 
+	public static StyleContext blueContext;
 	public static Style blueStyle;
 
 	Highlighter(StyledDocument doc){
@@ -68,7 +70,7 @@ public class Highlighter {
 			System.out.println("");
 		}//end of for
 
-	}
+	}//end of tokenize method
 
 	public void colorize(){
 
@@ -87,22 +89,34 @@ public class Highlighter {
 		Style redStyle = redContext.addStyle("redStyle", null);
 		StyleConstants.setForeground(redStyle, Color.red);
 
-		//style for string , numbers
+		//style for integer ;
+		StyleContext orangeContext = new StyleContext();
+		Style orangeStyle = orangeContext.addStyle("orangeStyle", null);
+		StyleConstants.setForeground(orangeStyle, Color.orange);
+
+
+        //style for float ;
+		StyleContext magentaContext = new StyleContext();
+		Style magentaStyle = magentaContext.addStyle("magentaStyle", null);
+		StyleConstants.setForeground(magentaStyle, Color.magenta);
+
+		//style for string
 		blueContext = new StyleContext();
 		blueStyle = blueContext.addStyle("blueStyle", null);
 		StyleConstants.setForeground(blueStyle, Color.blue);
 
 
 
+
 		for(int i=0;i<lines.length ;i++){
 			switch(lines[i]){
 				case "{" : case "}"  :{
-					System.out.println("this is {");
+					System.out.println("this is {}");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , greenStyle, false);
 					break ;
 				}
 				case "[" : case "]"  :{
-					System.out.println("this is [");
+					System.out.println("this is []");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , yellowStyle, false);
 					break ;
 				}
@@ -111,8 +125,19 @@ public class Highlighter {
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
 					break ;
 				}
+				case "number" : {
+					Integer.valueOf(number);
+				   //Integer.parseInt(string1)
+					System.out.println("this is integer");
+					break ;
+				}
+				case "floatf" :{
+					Float.parseFloat(floatf);
+				    System.out.println("this is flaot");
+					break;
+				}
 				default :
-					System.out.println("String OR int OR float");
+					System.out.println("String");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
 					break ;
 
