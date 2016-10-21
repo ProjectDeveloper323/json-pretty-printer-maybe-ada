@@ -148,34 +148,22 @@ public class Highlighter {
 				}
 
 				default :
-				try
-				{
-					System.out.println("String");
-					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
-					try
-					{
-						Integer.parseInt(lines[i]);
-						System.out.println("this is Integer");
-						this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , orangeStyle, false);
-					}
-					catch (ArithmeticException e)
-					{
-						System.out.println("ArithmeticException IN Integer");
-					}
-					try
-					{
-						Float.parseFloat(lines[i]);
-				    	System.out.println("this is flaot");
-				    	this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , magentaStyle, false);
-					}
-					catch (ArithmeticException e)
-					{
-						System.out.println("ArithmeticException IN Float");
-					}
+				try {
+					Integer.parseInt(lines[i]);
+					System.out.println("This is Integer");
+					this.doc.setCharacterAttributes(tokenIndex[i], lines[i].length(), orangeStyle, false);
 				}
-				catch (ArithmeticException e)
-				{
-					System.out.println("ArithmeticException IN String");
+				catch (ArithmeticException e1) {
+					try {
+						Float.parseFloat(lines[i]);
+						System.out.println("this is flaot");
+						this.doc.setCharacterAttributes(tokenIndex[i], lines[i].length(), magentaStyle, false);
+					}
+					catch(ArithmeticException e2) {
+						System.out.println("String");
+						this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
+					}
+
 				}
 			}//end of switch
 
