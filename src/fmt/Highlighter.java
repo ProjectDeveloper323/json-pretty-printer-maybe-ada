@@ -62,18 +62,38 @@ public class Highlighter {
 	public void tokenize(){
 
 		lines = new String[tok.size()];
-		tokenIndex = new int[tok.size()];
+		tokenIndex = new int[tok.size()-1];
 
+		//got an array of tokens 
 		for(int i =0 ;i<lines.length ;i++){
 			lines[i] = tok.get(i).getText();
-			tokenIndex[i]= tok.get(i).getTokenIndex();
-			System.out.println(lines[i]);
+			System.out.println(lines[i] );
 			System.out.println("");
 		}//end of for
 
+		//get an array of token indexes
+		try{
+			int startIndex = 0 ;
+			for (int i = 0 ; i<lines.length -1 ; i++){		
+				if(i == 0){
+					tokenIndex[i] = docString.indexOf(lines[i] ) ;
+					System.out.println("indexes >>> " + tokenIndex[i]);				
+				}else{
+					tokenIndex[i] = docString.indexOf(lines[i] , startIndex ) ;
+				}
+				startIndex += lines[i-1].length() ;
+
+
+
+			}			
+		}catch( Exception e){
+			System.out.println("error in getting the indexs");
+		}
+
+
 	}//end of tokenize method
 
-	public void colorize(){
+	public void colorize() throws Exception {
 
 		//style for curly brackets
 		greenContext = new StyleContext();

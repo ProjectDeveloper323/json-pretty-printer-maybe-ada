@@ -97,9 +97,14 @@ public class EditorPanel extends JPanel{
     
     private void dohighlight(String docString , StyledDocument doc){
         // Add your highlighting logic here
-        highlighter = new Highlighter(docString ,doc);
-        highlighter.tokenize();
-        highlighter.colorize();
+        try{
+            highlighter = new Highlighter(docString ,doc);
+            highlighter.tokenize();
+           // highlighter.colorize();
+        }catch(Exception e ){
+            System.out.println("some error happen ");
+        }
+
 
         prev_pane.setStyledDocument(highlighter.doc); 
     }
