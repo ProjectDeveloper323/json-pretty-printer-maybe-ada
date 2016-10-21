@@ -123,24 +123,39 @@ public class Highlighter {
 				case "null" : case "true"  : case "false" :{
 					System.out.println("keyword");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , redStyle, false);
-					break ;
+
 				}
-				case "number" : {
-					Integer.valueOf(number);
-				   //Integer.parseInt(string1)
-					System.out.println("this is integer");
-					break ;
-				}
-				case "floatf" :{
-					Float.parseFloat(floatf);
-				    System.out.println("this is flaot");
-					break;
-				}
+
 				default :
+				try
+				{
 					System.out.println("String");
 					this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , blueStyle, false);
-					break ;
-
+					try
+					{
+						Integer.parseInt(lines[i]);
+						System.out.println("this is Integer");
+						this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , orangeStyle, false);
+					}
+					catch (ArithmeticException e)
+					{
+						System.out.println("ArithmeticException IN Integer");
+					}
+					try
+					{
+						Float.parseFloat(lines[i]);
+				    	System.out.println("this is flaot");
+				    	this.doc.setCharacterAttributes(tokenIndex[i],lines[i].length() , magentaStyle, false);
+					}
+					catch (ArithmeticException e)
+					{
+						System.out.println("ArithmeticException IN Float");
+					}
+				}
+				catch (ArithmeticException e)
+				{
+					System.out.println("ArithmeticException IN String");
+				}
 			}//end of switch
 
 		}//end of for
