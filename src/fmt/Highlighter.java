@@ -72,18 +72,16 @@ public class Highlighter {
 		}//end of for
 
 		//get an array of token indexes
-		try{
+
 			int startIndex = 0;
-			for (int i = 0 ; i<lines.length ; i++){
+			for (int i = 0 ; i<lines.length -1 ; i++){
 				tokenIndex[i] = docString.indexOf(lines[i] ) ;
 				System.out.println("indexes >>> " + tokenIndex[i]);
 				tokenIndex[i] = docString.indexOf(lines[i] , startIndex ) ;
 				startIndex += lines[i].length() ;
-				System.out.print("test");
         	}//end of for
-        	}catch( Exception e){
-	    		System.out.println("error in getting the indexs");
-			}
+
+
 
 
 	}//end of tokenize method

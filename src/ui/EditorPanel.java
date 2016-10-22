@@ -22,16 +22,16 @@ import javax.swing.text.StyledDocument ;
 public class EditorPanel extends JPanel{
     private JTextPane text_pane;
     private JTextPane prev_pane;
-    private JSplitPane splitPane; 
+    private JSplitPane splitPane;
 
     Highlighter highlighter ;
 
     // Use this field to check if formatting is enabled
-    // However you must find a way to set it when a user 
+    // However you must find a way to set it when a user
     // change from "Highlight only", to "Highlight & format"
     private boolean format = false;
 
-    public EditorPanel(){  
+    public EditorPanel(){
         // Setup GUI Components
         initUI();
 
@@ -53,7 +53,7 @@ public class EditorPanel extends JPanel{
         // Editor Pane
         text_pane = new JTextPane();
         JScrollPane text_scroll = new JScrollPane(text_pane);
-        
+
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, text_scroll, prev_scroll);
         splitPane.setResizeWeight(0.5);
         splitPane.setOneTouchExpandable(false);
@@ -81,7 +81,7 @@ public class EditorPanel extends JPanel{
     }
     // All highlighting & Formating logic goes here
     private void updateDocument(){
-        // We must do format also 
+        // We must do format also
         if (this.format ){
             // Ok, then do formating first
             doformat();
@@ -94,19 +94,14 @@ public class EditorPanel extends JPanel{
     private void doformat(){
         // Add your formatting logic here
     }
-    
+
     private void dohighlight(String docString , StyledDocument doc){
         // Add your highlighting logic here
-        try{
-            highlighter = new Highlighter(docString ,doc);
-            highlighter.tokenize();
-           // highlighter.colorize();
-        }catch(Exception e ){
-            System.out.println("some error happen ");
-        }
+    	highlighter = new Highlighter(docString ,doc);
+        highlighter.tokenize();
+        // highlighter.colorize();
 
-
-        prev_pane.setStyledDocument(highlighter.doc); 
+        prev_pane.setStyledDocument(highlighter.doc);
     }
 
 }
